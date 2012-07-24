@@ -1,0 +1,9 @@
+$def with (books, pages)
+
+$for book in books:
+    <h2><a href="/book/$book.id">$book.title</a></h2>
+    <p>$:book.description</p>
+
+$for page in range(1, pages + 1):
+    <a href="/page/$page">$page</a>
+<br/><br/>

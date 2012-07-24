@@ -1,0 +1,21 @@
+$def with (book, chapters)
+$if book.asins:
+    <iframe src="http://rcm-cn.amazon.cn/e/cm?t=c0a0-23&o=28&p=8&l=as1&asins=$book.asins&ref=qf_sp_asin_til&fc1=000000&IS2=1&lt1=_blank&m=amazon&lc1=0000FF&bc1=000000&bg1=FFFFFF&f=ifr" style="width:120px;height:240px;float:right;margin-right:2px;margin-bottom: 6px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+<div style="float:left">
+<p>$book.title</p>
+<p>$book.publisher</p>
+<p>$book.publishing_date</p>
+<p>$book.ISBN</p>
+<p>$book.cost</p>
+<p>$book.tags</p>
+</div>
+<div style="clear:both">
+<p>$:book.description</p>
+<p>免责声明：图书版权归出版社和作者所有</p>
+</div>
+
+$for chapter in chapters:
+    <p><a href="/chapter/$chapter.id">$chapter.name</a></p>
+
+<br/>
+<br/>

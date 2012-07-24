@@ -1,0 +1,83 @@
+$def with (content)
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>$title</title>
+
+<meta name="Description" content="" />
+<meta name="author" content="" />
+<meta name="Keywords" content="" />
+
+<meta name="robots" content="all,follow" />
+
+<link rel="stylesheet" href="/static/css/style.css" type="text/css" media="screen, projection, tv" />
+<link rel="stylesheet" href="/static/css/style-print.css" type="text/css" media="print" />
+
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+<div id="obal">
+<div id="page">
+		<div id="header">
+		<div class="search">
+			<form action="/search/" method="post" name="search" id="search">
+				<input id="s" type="text" name="search" />
+				<input type="submit" id="search_btn" value="Search" />
+			</form>
+		</div>
+		<h1><a href="http://goo.gl/CPqI9">在线 IT 电子书</a></h1>
+		<p>学习、技术、艺术、管理...</p>
+		</div>
+		<script type="text/javascript"><!--
+		google_ad_client = "ca-pub-8763135557233946";
+		/* 首页横幅 */
+		google_ad_slot = "8161384602";
+		google_ad_width = 728;
+		google_ad_height = 90;
+		//-->
+		</script>
+		<script type="text/javascript"
+		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+		</script>
+		<hr class="noscreen" />
+
+		<div id="col"><div id="col-in">
+
+		$:content
+
+		<hr class="noscreen" />
+
+		<div id="footer"><div id="footer-in"><a href="/about/">关于</a> <a href="https://github.com/frankfu/itbook">源码</a> | <a href="http://goo.gl/CPqI9">简单的IT电子书网站</a></div></div>
+</div>
+
+$if menu:
+	<ul id="menu"><li><a href="/">首页</a></li> <li><a href="/book/$bookid">目录</a></li> 
+	$if previousid:
+		<li><a href="/chapter/$previousid">上一章</a></li> 
+	$if nextid:
+		<li><a href="/chapter/$nextid">下一章</a></li></ul>
+</div>
+
+</body>
+</html>
+
+<!-- Baidu Button BEGIN -->
+<script type="text/javascript" id="bdshare_js" data="type=slide&img=2" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+ document.getElementById("bdshell_js").src = "http://share.baidu.com/static/js/shell_v2.js?t=" + new Date().getHours();
+</script>
+<!-- Baidu Button END --> 
+
+<!--start contactable -->
+<div id="contactable"><!-- contactable html placeholder --></div>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://anygoogle.com/contactable/jquery.validate.pack.js"></script>
+<script type="text/javascript" src="http://anygoogle.com/contactable/jquery.contactable.js"></script>
+<link rel="stylesheet" href="http://anygoogle.com/contactable/contactable.css" type="text/css" />
+<script>\$(function(){\$('#contactable').contactable({name: '姓名', email: '邮件', message : '内容', submit : '发送', disclaimer: '随时与我联系', recievedMsg : '谢谢你的反馈', notRecievedMsg : '对不起无法发送邮件', subject: 'feedback URL:'+location.href, url: '/sendmail/'});});</script>
+<style>label, .disclaimer {color: white}</style>
+<!--end contactable -->

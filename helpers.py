@@ -56,28 +56,21 @@ def render_book_or_none(id):
     chapters = db.select('chapters', what='*', order='book_id, weight ASC', where="book_id = $id", vars=locals())
     return render({'title': settings.SITE_NAME + ' - ' + book.title, 'menu': False}).book(book, chapters)
 
-def render_chapter_or_none(id):
+def render_chapter_or_none(book_id, weight):
     try:
-        chapter = db.select('chapters', what='id, name, content, book_id', where="id = $id", vars=locals())[0]
+        chapter = db.select('chapters', what='id, name, content, book_id', where="book_id = $book_id and weight = $weight", vars=locals())[0]
     except IndexError:
         raise web.notfound()
-    book = db.select('books', what='*', where="id = $chapter.book_id", vars=locals())[0]
-    chapter_id_list = list(db.select('chapters', what='id', order='book_id, weight ASC', where="book_id = $chapter.book_id", vars=locals()))
-    i = 0
-    while True:
-        if i < len(chapter_id_list):
-            if chapter_id_list[i].id == chapter.id:
-                if i == 0:
-                    previousid = 0
-                    nextid = chapter_id_list[i + 1].id
-                elif i == len(chapter_id_list) - 1:
-                    previousid = chapter_id_list[i - 1].id
-                    nextid = 0
-                else:
-                    previousid = chapter_id_list[i - 1].id
-                    nextid = chapter_id_list[i + 1].id
-                break
-        else:
-            break
-        i += 1
-    return render({'title': settings.SITE_NAME + ' - ' + book.title, 'menu': True, 'bookid': book.id, 'previousid': previousid, 'nextid': nextid}).chapter(book, chapter)
+    book = db.select('books', what='*', where="id = $book_id", vars=locals())[0]
+    chaptercount = db.query("SELECT COUNT(*) AS count FROM chapters WHERE book_id = $book_id", vars=locals())[0]
+    weight = int(weight)
+    if chaptercount == 1:
+        previous = 0
+        next = 0
+    elif chaptercount.count == weight:
+        previous = weight - 1
+        next = 0
+    else:
+        previous = weight - 1
+        next = weight + 1
+    return render({'title': settings.SITE_NAME + ' - ' + book.title, 'menu': True, 'bookid': book.id, 'previous': previous, 'next': next}).chapter(book, chapter)

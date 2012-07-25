@@ -8,7 +8,7 @@ urls = (
   '/about/', 'about',
   '/page/(.*)', 'index',
   '/book/(.*)', 'book',
-  '/chapter/(.*)', 'chapter',
+  '/chapter/(.*)/(.*)', 'chapter',
   '/search/', 'search',
   '/result/(.*)', 'result',
   '/sendmail/', 'sendmail')
@@ -37,8 +37,8 @@ class book:
         return render_book_or_none(id)
 
 class chapter:
-    def GET(self, id):
-        return render_chapter_or_none(id)
+    def GET(self, book_id, weight):
+        return render_chapter_or_none(book_id, weight)
 
 class search:
     def POST(self):

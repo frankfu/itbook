@@ -15,7 +15,7 @@ $if book.asins:
 </div>
 
 $for chapter in chapters:
-    <p><a href="/chapter/$chapter.id">$chapter.name</a></p>
+    <p><a href="/chapter/$chapter.book_id/$chapter.weight">$chapter.name</a></p>
 
 <br/>
 <br/>

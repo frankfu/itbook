@@ -1,5 +1,18 @@
 $def with (book, chapter)
-
+$if menu:
+	<a href="/book/$bookid">返回</a>
+	$if previous:
+		<a href="/chapter/$bookid/$previous">上一章</a>
+	$if next:
+		<a href="/chapter/$bookid/$next">下一章</a>
+<br/><br/><br/>
 <h3>$book.title</h3>
 $:chapter.content
 <br/><br/>
+$if menu:
+	<a href="/book/$bookid">返回</a>
+	$if previous:
+		<a href="/chapter/$bookid/$previous">上一章</a>
+	$if next:
+		<a href="/chapter/$bookid/$next">下一章</a>
+<br/><br/><br/>
